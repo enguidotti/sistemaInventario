@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="text-center">
+    <h2>Crear Marca</h2>
+</div>
+
+<div>
+    <form method="post" action="/Marcas/Create/">
+        <div class="form-group row">
+            <label class="col-2">Nombre:</label>
+            <div class="col-10">
+                <input type="text" name="nombre" id="nombre" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-2">Descripición:</label>
+            <div class="col-10">
+                <input type="text" name="descripcion" id="descripcion" class="form-control" />
+            </div>
+        </div>
+        <div class="text-center">
+            <input type="submit"  value="Guardar" class="btn btn-lg btn-primary" />
+        </div>
+    </form>
+</div>

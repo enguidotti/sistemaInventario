@@ -1,0 +1,29 @@
+﻿@model IEnumerable<sistemaInventario.Models.Marca>
+@{
+    ViewBag.Title = "Marcas";
+}
+
+<h2>Lista de Marcas</h2>
+
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.id_marca</td>
+                    <td>@item.nombre</td>
+                    <td>@item.descripcion</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

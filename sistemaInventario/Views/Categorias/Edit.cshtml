@@ -1,0 +1,32 @@
+﻿@model sistemaInventario.Models.Categoria
+@{
+    ViewBag.Title = "Editar";
+}
+<div class="text-center">
+    <h2>Editar Categoría</h2>
+</div>
+<div>
+    <form method="post" action="/Categorias/Edit">
+        <div class="form-group row">
+            <label class="col-2">Id Categoría: </label>
+            <div class="col-6">
+                <input type="text" name="id_categoria" class="form-control" value="@Model.id_categoria" readonly />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-2">Nombre: </label>
+            <div class="col-6">
+                <input type="text" name="nombre" class="form-control" value="@Model.nombre" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-2">Descripción: </label>
+            <div class="col-6">
+                <input type="text" name="descripcion" class="form-control" value="@Model.descripcion" />
+            </div>
+        </div>
+        <div class="text-center">
+            <input type="submit" id="btnEnviar" value="Guardar" class="btn btn-lg btn-success" />
+        </div>
+    </form>
+</div>

@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "Crear Producto";
+}
+
+<div class="text-center">
+    <h2>Crear Producto</h2>
+</div>
+<div>
+    <form method="post" action="/Productos/Create">
+        <div class="form-group row">
+            <label class="col-2">Categoría: </label>
+            <div class="col-6">
+                @Html.DropDownList("id_categoria", null, "Seleccione categoría", htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-2">Marca: </label>
+            <div class="col-6">
+                <!--Html.DropDownList es un helper para mostrar los select con un ViewBag-->
+                @Html.DropDownList("marca", null, "Seleccione una marca", htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-2">Proveedor: </label>
+            <div class="col-6">
+                @Html.DropDownList("proveedor", null, "Seleccione proveedor", htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-2">Nombre: </label>
+            <div class="col-6">
+                <input type="text" name="nombre" id="nombre" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-2">Código: </label>
+            <div class="col-6">
+                <input type="text" name="codigo" id="codigo" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-2">Precio: </label>
+            <div class="col-6">
+                <input type="text" name="precio" id="precio" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-2">Descripción: </label>
+            <div class="col-6">
+                <textarea name="descripcion" id="descripcion" class="form-control"></textarea>
+            </div>
+        </div>
+        <div class="text-center">
+            <input type="submit" id="btnEnviar" value="Guardar" class="btn btn-lg btn-success" />
+        </div>
+    </form>
+</div>
+<script src="~/Scripts/swal.min.js"></script>
+<script>
+    $('#btnEnviar').click(function (e) {
+        let error = '';
+        if (!$('#id_categoria').val()) {
+            error = 'Debe seleccionar categoría del producto \n';
+        }
+        if (!$('#marca').val()) {
+            error += 'Debe seleccionar marca del producto \n';
+        }
+        if (!$('#proveedor').val()) {
+            error += 'Debe seleccionar proveedor del producto \n';
+        }
+        if ($('#nombre').val().trim() == '') {
+            error += 'Debe ingresar nombre del producto \n';
+        }
+        if ($('#codigo').val().trim() == '') {
+            error += 'Debe ingresar código del producto \n';
+        }
+        if ($('#precio').val().trim() == '') {
+            error += 'Debe ingresar precio del producto \n';
+        }
+        if (error != '') {
+            e.preventDefault();
+            swal('Error validación',error,'warning');
+        }
+    });
+</script>

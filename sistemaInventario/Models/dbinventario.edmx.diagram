@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="97a4c3722e43416fb11c63ec76e9c342" Name="Diagram1">
+        <EntityTypeShape EntityType="db_inventarioModel.Bodega" Width="1.5" PointX="6" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_inventarioModel.Categoria" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_inventarioModel.DetalleEntrada" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_inventarioModel.DetalleSalida" Width="1.5" PointX="10.5" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_inventarioModel.Marca" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_inventarioModel.OrdenEntrada" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_inventarioModel.OrdenSalida" Width="1.5" PointX="8.25" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_inventarioModel.Producto" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_inventarioModel.Proveedor" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_inventarioModel.StockBodega" Width="1.5" PointX="8.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_inventarioModel.TipoUsuario" Width="1.5" PointX="1.5" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_inventarioModel.Usuario" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
+        <AssociationConnector Association="db_inventarioModel.FK_StockBodega_Bodega" ManuallyRouted="false" />
+        <AssociationConnector Association="db_inventarioModel.FK_Producto_Categoria" ManuallyRouted="false" />
+        <AssociationConnector Association="db_inventarioModel.FK_DetalleEntrada_OrdenEntrada" ManuallyRouted="false" />
+        <AssociationConnector Association="db_inventarioModel.FK_DetalleEntrada_Producto" ManuallyRouted="false" />
+        <AssociationConnector Association="db_inventarioModel.FK_DetalleSalida_OrdenSalida" ManuallyRouted="false" />
+        <AssociationConnector Association="db_inventarioModel.FK_DetalleSalida_StockBodega" ManuallyRouted="false" />
+        <AssociationConnector Association="db_inventarioModel.FK_Producto_Marca" ManuallyRouted="false" />
+        <AssociationConnector Association="db_inventarioModel.FK_OrdenEntrada_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="db_inventarioModel.FK_OrdenSalida_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="db_inventarioModel.FK_OrdenSalida_Usuario1" ManuallyRouted="false" />
+        <AssociationConnector Association="db_inventarioModel.FK_Producto_Proveedor" ManuallyRouted="false" />
+        <AssociationConnector Association="db_inventarioModel.FK_StockBodega_Producto" ManuallyRouted="false" />
+        <AssociationConnector Association="db_inventarioModel.FK_Usuario_TipoUsuario" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
