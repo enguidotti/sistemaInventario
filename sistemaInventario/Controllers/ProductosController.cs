@@ -33,10 +33,28 @@ namespace sistemaInventario.Controllers
             ViewBag.proveedor = new SelectList(db.Proveedor, "id_proveedor", "nombre");
             return View();
         }
-        // GET: Productos
+        //método para verificar si el código del producto ya esta ingresado
+        [HttpPost]
+        public ActionResult CodigoExiste(string codigo)
+        {
+            //pregunta si el string es distinto de nullo vacío
+            if (!string.IsNullOrEmpty(codigo))
+            {
+                //select * from producto p where LOWER(p.codigo) = LOWER(codigo)
+                var q = db.Producto.FirstOrDefault(p=>p.codigo.ToLower().Equals(codigo.ToLower()));
+                if(q != null)
+                {
+                    string nombre = q.nombre;//devuelve el nombre del producto cuyo código esta ingresado
+                    return Json(nombre);
+                }
+            }
+            return Json("");
+        }
+
         public ActionResult Index()
         {
-            return View();
+            var productos = db.Producto.ToList();
+            return View(productos);
         }
     }
 }

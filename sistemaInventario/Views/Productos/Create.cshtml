@@ -80,7 +80,25 @@
         }
         if (error != '') {
             e.preventDefault();
-            swal('Error validación',error,'warning');
+            swal('Error validación', error, 'warning');
+        }
+    });
+    //se activa la función cuando pierde el focus del input código
+    $('#codigo').blur(function () {
+        if ($('#codigo').val().trim() != '') {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("CodigoExiste")',
+                data: '{codigo:' + JSON.stringify($('#codigo').val().trim()) + '}',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (result) {
+                    if (result != '') {
+                        swal('Error', 'El código ya existe para el producto: ' + result, 'warning');
+                        $('#codigo').val('');
+                    }
+                }
+            });
         }
     });
 </script>

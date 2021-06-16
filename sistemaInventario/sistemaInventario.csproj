@@ -120,6 +120,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\auxiliar.cs" />
     <Compile Include="Models\Bodega.cs">
       <DependentUpon>dbinventario.tt</DependentUpon>
     </Compile>
@@ -193,6 +194,7 @@
     <Content Include="Views\Categorias\Delete.cshtml" />
     <Content Include="Views\Productos\Create.cshtml" />
     <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Views\Productos\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

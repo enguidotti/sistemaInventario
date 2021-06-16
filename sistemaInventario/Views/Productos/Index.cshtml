@@ -1,0 +1,48 @@
+﻿@model IEnumerable<sistemaInventario.Models.Producto>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Gestión Productos</h2>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <i class=""></i> Listado de Productos
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Proveedor</th>
+                    <th>Categoría</th>
+                    <th>Marca</th>
+                    <th>Producto</th>
+                    <th>Código</th>
+                    <th>Precio</th>
+                    <th>Descripción</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Proveedor.nombre</td>
+                        <td>@item.Categoria.nombre</td>
+                        <td>@item.Marca.nombre</td>
+                        <td>@item.nombre</td>
+                        <td>@item.codigo</td>
+                        <td>@item.precio.ToString("C")</td>
+                        <td>@item.descripcion</td>
+                        <td>
+                            <a href="/Productos/Edit/@item.id_producto" class="btn btn-warning">Editar</a>
+                            <a href="/Productos/Delete/@item.id_producto" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
