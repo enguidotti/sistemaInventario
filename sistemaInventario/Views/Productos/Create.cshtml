@@ -3,58 +3,61 @@
     ViewBag.Title = "Crear Producto";
 }
 
-<div class="text-center">
-    <h2>Crear Producto</h2>
-</div>
-<div>
-    <form method="post" action="/Productos/Create">
-        <div class="form-group row">
-            <label class="col-2">Categoría: </label>
-            <div class="col-6">
-                @Html.DropDownList("id_categoria", null, "Seleccione categoría", htmlAttributes: new { @class = "form-control" })
+<div class="card mb-4">
+    <div class="card-header">
+        Crear Producto
+    </div>
+
+    <div class="card-body">
+        <form method="post" action="/Productos/Create">
+            <div class="form-group row">
+                <label class="col-2">Categoría: </label>
+                <div class="col-10">
+                    @Html.DropDownList("id_categoria", null, "Seleccione categoría", htmlAttributes: new { @class = "form-control" })
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-2">Marca: </label>
-            <div class="col-6">
-                <!--Html.DropDownList es un helper para mostrar los select con un ViewBag-->
-                @Html.DropDownList("marca", null, "Seleccione una marca", htmlAttributes: new { @class = "form-control" })
+            <div class="form-group row">
+                <label class="col-2">Marca: </label>
+                <div class="col-10">
+                    <!--Html.DropDownList es un helper para mostrar los select con un ViewBag-->
+                    @Html.DropDownList("marca", null, "Seleccione una marca", htmlAttributes: new { @class = "form-control" })
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-2">Proveedor: </label>
-            <div class="col-6">
-                @Html.DropDownList("proveedor", null, "Seleccione proveedor", htmlAttributes: new { @class = "form-control" })
+            <div class="form-group row">
+                <label class="col-2">Proveedor: </label>
+                <div class="col-10">
+                    @Html.DropDownList("proveedor", null, "Seleccione proveedor", htmlAttributes: new { @class = "form-control" })
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-2">Nombre: </label>
-            <div class="col-6">
-                <input type="text" name="nombre" id="nombre" class="form-control" />
+            <div class="form-group row">
+                <label class="col-2">Nombre: </label>
+                <div class="col-10">
+                    <input type="text" name="nombre" id="nombre" class="form-control" />
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-2">Código: </label>
-            <div class="col-6">
-                <input type="text" name="codigo" id="codigo" class="form-control" />
+            <div class="form-group row">
+                <label class="col-2">Código: </label>
+                <div class="col-10">
+                    <input type="text" name="codigo" id="codigo" class="form-control" />
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-2">Precio: </label>
-            <div class="col-6">
-                <input type="text" name="precio" id="precio" class="form-control" />
+            <div class="form-group row">
+                <label class="col-2">Precio: </label>
+                <div class="col-10">
+                    <input type="text" name="precio" id="precio" class="form-control" />
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-2">Descripción: </label>
-            <div class="col-6">
-                <textarea name="descripcion" id="descripcion" class="form-control"></textarea>
+            <div class="form-group row">
+                <label class="col-2">Descripción: </label>
+                <div class="col-10">
+                    <textarea name="descripcion" id="descripcion" class="form-control"></textarea>
+                </div>
             </div>
-        </div>
-        <div class="text-center">
-            <input type="submit" id="btnEnviar" value="Guardar" class="btn btn-lg btn-success" />
-        </div>
-    </form>
+            <div class="text-center">
+                <input type="submit" id="btnEnviar" value="Guardar" class="btn btn-lg btn-success" />
+            </div>
+        </form>
+    </div>
 </div>
 <script src="~/Scripts/swal.min.js"></script>
 <script>

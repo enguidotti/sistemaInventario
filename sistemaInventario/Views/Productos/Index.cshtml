@@ -3,14 +3,14 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Gestión Productos</h2>
+
 
 <div class="card mb-4">
     <div class="card-header">
-        <i class=""></i> Listado de Productos
+        Listado de Productos
     </div>
     <div class="card-body">
-        <table class="table">
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>Proveedor</th>
@@ -35,7 +35,10 @@
                         <td>@item.precio.ToString("C")</td>
                         <td>@item.descripcion</td>
                         <td>
-                            <a href="/Productos/Edit/@item.id_producto" class="btn btn-warning">Editar</a>
+                            <button class="btn btn-warning" data-toggle="modal" data-target="#modalEdit"
+                                    data-url="@Url.Action("Edit","Productos", new { id = item.id_producto})">
+                                Editar
+                            </button>
                             <a href="/Productos/Delete/@item.id_producto" class="btn btn-danger">Eliminar</a>
                         </td>
                     </tr>
@@ -43,6 +46,19 @@
             </tbody>
         </table>
     </div>
+
 </div>
 
+<div class="modal fade" id="modalEdit">
+</div>
+<script>
+    $('.btn-warning').click(function () {
+        let url = $(this).data('url');//Productos/Edit/1
+        //permite acceder al controdalor y a un acción (Porudctos/Edit)
+        $.get(url, function (data) {
+            $('#modalEdit').html(data);
+            $('#modalEdit').show();
+        });
+    });
+</script>
 

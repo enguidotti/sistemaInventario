@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -50,11 +51,31 @@ namespace sistemaInventario.Controllers
             }
             return Json("");
         }
-
         public ActionResult Index()
         {
             var productos = db.Producto.ToList();
             return View(productos);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            //consulta el detalla del producto en base al id 
+            var producto = db.Producto.Find(id);
+            if(producto != null)
+            {
+                ViewBag.id_categoria = new SelectList(db.Categoria, "id_categoria", "nombre", producto.id_categoria);
+                ViewBag.id_marca = new SelectList(db.Marca, "id_marca", "nombre", producto.id_marca);
+                ViewBag.id_proveedor = new SelectList(db.Proveedor, "id_proveedor", "nombre", producto.id_proveedor);
+                return PartialView("_Edit",producto);
+            }
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Edit(Producto producto)
+        {
+            db.Entry(producto).State = EntityState.Modified;
+            db.SaveChanges();
+            return Json("ok");
         }
     }
 }

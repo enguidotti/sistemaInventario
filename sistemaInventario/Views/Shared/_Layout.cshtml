@@ -2,71 +2,131 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title - Inventario</title>
-    <link href="~/Content/styles.css" rel="stylesheet" />
+    <link href="~/Content/sb-admin-2.min.css" rel="stylesheet" />
+    <link href="~/Content/fontawesome-free/css/all.min.css" rel="stylesheet" />
     <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.easing.min.js"></script>
+    <script src="~/Scripts/sb-admin-2.min.js"></script>
 </head>
-<body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <a class="navbar-brand" href="~/">Sitema Inventario</a>
-        <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-        <!-- Navbar Search-->
-        <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-            <div class="input-group">
-                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
-                </div>
-            </div>
-        </form>
-        <!-- Navbar-->
-        <ul class="navbar-nav ml-auto ml-md-0">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="userDropdown" href="#!" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-            </li>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#!">Settings</a>
-                <a class="dropdown-item" href="#!">Activity Log</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="">Logout</a>
-            </div>
-        </ul>
-    </nav>
+<body class="page-top">
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-    <div id="layoutSidenav">
-        <!--Menu lateral-->
-        <div id="layoutSidenav_nav">
-            <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion">
-                <div class="sb-sidenav-menu">
-                    <div class="nav">
-                        <div class="sb-sidenav-menu-heading">Productos</div>
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Categorías
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="">Crear Categoría</a>
-                                <a class="nav-link" href="">Lista Categorías</a>
-                            </nav>
-                        </div>
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="~\">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Sistema Inventario</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Inicio</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Mantenerdores
+            </div>
+            <!-- Nav Item Productos -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProducto"
+                   aria-expanded="true" aria-controls="collapseProducto">
+                    <i class="fas fa-fw fa-bars"></i>
+                    <span>Productos</span>
+                </a>
+                <div id="collapseProducto" class="collapse" aria-labelledby="headingProducto" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Gestión Productos:</h6>
+                        <a class="collapse-item" href="@Url.Action("Create","Productos")">Crear Producto</a>
+                        <a class="collapse-item" href="@Url.Action("Index","Productos")">Listado Productos</a>
                     </div>
                 </div>
-                <div class="sb-sidenav-footer">
-                    <div class="small">Usuario:</div>
-                    Usuario Prueba
+            </li>
+            <!-- Nav Item Marcas -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
+                   aria-expanded="true" aria-controls="collapseOne">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Marcas</span>
+                </a>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Gestión Marcas:</h6>
+                        <a class="collapse-item" href="@Url.Action("Create","Marcas")">Crear Marca</a>
+                        <a class="collapse-item" href="@Url.Action("Index","Marcas")">Listado Marcas</a>
+                    </div>
                 </div>
-            </nav>
+            </li>
+            <!-- Nav Item Categorías -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategorias"
+                   aria-expanded="true" aria-controls="collapseCategorias">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Categorías</span>
+                </a>
+                <div id="collapseCategorias" class="collapse" aria-labelledby="headingCategorias"
+                     data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Gestión Categorías:</h6>
+                        <a class="collapse-item" href="@Url.Action("Create","Categorias")">Crear Categoría</a>
+                        <a class="collapse-item" href="@Url.Action("Index","Categorias")">Listado Categorías</a>
+                    </div>
+                </div>
+            </li>
 
-        </div>
-        <!--Contenido-->
-        <div id="layoutSidenav_content">
-            <main>
-                <div class="container">
+        </ul>
+        <!-- End of Sidebar -->
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+
+                </nav>
+                <!-- End of Topbar -->
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
                     @RenderBody()
                 </div>
-            </main>
+                <!-- /.container-fluid -->
+            </div>
+
+            <!-- End of Main Content -->
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Derechos reservados &copy; </span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
         </div>
+        <!-- End of Content Wrapper -->
     </div>
 </body>
 </html>

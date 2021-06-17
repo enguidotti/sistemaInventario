@@ -1,0 +1,117 @@
+﻿@model sistemaInventario.Models.Producto
+
+<div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">Editar Producto</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group row">
+                <input type="hidden" name="id_producto" id="id_producto" value="@Model.id_producto" />
+                <!-- @Html.HiddenFor(p=>p.id_producto) helper razor para ocultar un input-->
+                <label class="col-2">Categoría:</label>
+                <div class="col-10">
+                    @Html.DropDownList("id_categoria", null, htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-2">Marca:</label>
+                <div class="col-10">
+                    @Html.DropDownList("id_marca", null, htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-2">Proveedor:</label>
+                <div class="col-10">
+                    @Html.DropDownList("id_proveedor", null, htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-2">Nombre:</label>
+                <div class="col-10">
+                    <input type="text" name="nombre" id="nombre" value="@Model.nombre" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-2">Código:</label>
+                <div class="col-10">
+                    <input type="text" name="codigo" id="codigo" value="@Model.codigo" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-2">Precio:</label>
+                <div class="col-10">
+                    <input type="text" name="precio" id="precio" value="@Model.precio" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-2">Descripción:</label>
+                <div class="col-10">
+                    <input type="text" name="descripcion" id="descripcion" value="@Model.descripcion" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" id="btnCerrar" data-dismiss="modal">Cerrar</button>
+            <input type="button" id="btnEditar" value="Editar" class="btn btn-success" />
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/swal.min.js"></script>
+<script>
+    $('#btnEditar').click(function () {
+        //validación
+        let error = '';
+        if ($('#nombre').val().trim() == '') {
+            error += 'Debe ingresar nombre del producto \n';
+        }
+        if ($('#codigo').val().trim() == '') {
+            error += 'Debe ingresar código del producto \n';
+        }
+        if ($('#precio').val().trim() == '') {
+            error += 'Debe ingresar precio del producto \n';
+        }
+        if (error != '') {
+            swal('Error validación', error, 'warning');
+        }
+        else {
+            //construir el objeto a enviar al controlador
+            const producto = {
+                id_producto: $('#id_producto').val(),
+                id_categoria: $('#id_categoria').val(),
+                id_marca: $('#id_marca').val(),
+                id_proveedor: $('#id_proveedor').val(),
+                nombre: $('#nombre').val().trim(),
+                codigo: $('#codigo').val().trim(),
+                precio: $('#precio').val(),
+                descripcion: $('#descripcion').val().trim()
+            }
+            //se envia por ajax y método post
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Edit")',
+                data: '{producto:' + JSON.stringify(producto) + '}',
+                dataType: 'json',
+                contentType: 'application/json; chartset=utf-8',
+                success: function (respuesta) {
+                    //si la respuesta es igual a ok realiza actualización
+                    if (respuesta === 'ok') {
+                        $('#modaEdit').modal('hide');//se cierra el modal popup
+                        swal({
+                            title: 'Modificar producto',
+                            text: 'Los datos han sido modificados con éxito!!!',
+                            icon: 'success',
+                            closeOnClickOutside: false,
+                        }).then(function (value) {
+                            if (value) {
+                                location.reload();
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    });
+</script>
