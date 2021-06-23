@@ -53,8 +53,11 @@ namespace sistemaInventario.Controllers
         }
         public ActionResult Index()
         {
-            var productos = db.Producto.ToList();
-            return View(productos);
+            //viewbag para los select
+            ViewBag.proveedor = new SelectList(db.Proveedor, "id_proveedor", "nombre");
+            ViewBag.marca = new SelectList(db.Marca, "id_marca", "nombre");
+            ViewBag.categoria = new SelectList(db.Categoria, "id_categoria", "nombre");
+            return View();
         }
 
         public ActionResult Edit(int id)
@@ -76,6 +79,22 @@ namespace sistemaInventario.Controllers
             db.Entry(producto).State = EntityState.Modified;
             db.SaveChanges();
             return Json("ok");
+        }
+        //buscar según filtros
+        public ActionResult ListarProductos(int? proveedor, int? marca, int? categoria)
+        {
+            //retornar todos los productos
+            var productos = db.Producto.ToList();
+            if (proveedor != null)
+                productos = productos.Where(p => p.id_proveedor == proveedor).ToList();
+
+            if (marca != null)
+                productos = productos.Where(p => p.id_marca == marca).ToList();
+
+            if (categoria != null)
+                productos = productos.Where(p => p.id_categoria == categoria).ToList();
+
+            return PartialView("_ListarProductos",productos);
         }
     }
 }

@@ -1,0 +1,47 @@
+﻿<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Proveedor</th>
+            <th>Categoría</th>
+            <th>Marca</th>
+            <th>Producto</th>
+            <th>Código</th>
+            <th>Precio</th>
+            <th>Descripción</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Proveedor.nombre</td>
+                <td>@item.Categoria.nombre</td>
+                <td>@item.Marca.nombre</td>
+                <td>@item.nombre</td>
+                <td>@item.codigo</td>
+                <td>@item.precio.ToString("C")</td>
+                <td>@item.descripcion</td>
+                <td>
+                    <button class="btn btn-warning" data-toggle="modal" data-target="#modalEdit"
+                            data-url="@Url.Action("Edit","Productos", new { id = item.id_producto})">
+                        Editar
+                    </button>
+                    <a href="/Productos/Delete/@item.id_producto" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="modal fade" id="modalEdit">
+</div>
+<script>
+    $('.btn-warning').click(function () {
+        let url = $(this).data('url');//Productos/Edit/1
+        //permite acceder al controdalor y a un acción (Porudctos/Edit)
+        $.get(url, function (data) {
+            $('#modalEdit').html(data);
+            $('#modalEdit').show();
+        });
+    });
+</script>

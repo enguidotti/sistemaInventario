@@ -1771,7 +1771,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\auxiliar.cs" />
     <Compile Include="Models\Bodega.cs">
       <DependentUpon>dbinventario.tt</DependentUpon>
     </Compile>
@@ -1863,6 +1862,7 @@
     <Content Include="Views\Productos\Index.cshtml" />
     <Content Include="Views\Productos\_Edit.cshtml" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Views\Productos\_ListarProductos.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

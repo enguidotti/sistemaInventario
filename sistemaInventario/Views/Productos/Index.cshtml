@@ -10,55 +10,39 @@
         Listado de Productos
     </div>
     <div class="card-body">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Proveedor</th>
-                    <th>Categoría</th>
-                    <th>Marca</th>
-                    <th>Producto</th>
-                    <th>Código</th>
-                    <th>Precio</th>
-                    <th>Descripción</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@item.Proveedor.nombre</td>
-                        <td>@item.Categoria.nombre</td>
-                        <td>@item.Marca.nombre</td>
-                        <td>@item.nombre</td>
-                        <td>@item.codigo</td>
-                        <td>@item.precio.ToString("C")</td>
-                        <td>@item.descripcion</td>
-                        <td>
-                            <button class="btn btn-warning" data-toggle="modal" data-target="#modalEdit"
-                                    data-url="@Url.Action("Edit","Productos", new { id = item.id_producto})">
-                                Editar
-                            </button>
-                            <a href="/Productos/Delete/@item.id_producto" class="btn btn-danger">Eliminar</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+        <div class="form-group row">
+            <label class="col-1">Proveedor</label>
+            <div class="col-2">
+                @Html.DropDownList("proveedor", null, "Todos", htmlAttributes: new { @class = "form-control" })
+            </div>
+            <label class="col-1">Marca</label>
+            <div class="col-2">
+                @Html.DropDownList("marca", null, "Todas", htmlAttributes: new { @class = "form-control" })
+            </div>
+            <label class="col-1">Categoría</label>
+            <div class="col-2">
+                @Html.DropDownList("categoria", null, "Todas", htmlAttributes: new { @class = "form-control" })
+            </div>
+            <button class="btn btn-success" id="buscar">
+                Buscar
+            </button>
+        </div>
+        <hr />
+        <div class="table-responsive" id="tablaProductos"></div>
     </div>
-
 </div>
 
-<div class="modal fade" id="modalEdit">
-</div>
+
 <script>
-    $('.btn-warning').click(function () {
-        let url = $(this).data('url');//Productos/Edit/1
-        //permite acceder al controdalor y a un acción (Porudctos/Edit)
-        $.get(url, function (data) {
-            $('#modalEdit').html(data);
-            $('#modalEdit').show();
-        });
+    ///método que envía los filtros al contralador y muesta la tabla con los filtros
+    $('#buscar').click(function () {
+        cargarTabla();
     });
+    function cargarTabla() {
+        let datos = '?proveedor=' + $('#proveedor').val() + '&marca=' + $('#marca').val() + '&categoria='+ $('#categoria').val();
+        $.get('@Url.Action("ListarProductos")' + datos, function (productos) {
+            $('#tablaProductos').html(productos);
+        });
+    }
 </script>
 
