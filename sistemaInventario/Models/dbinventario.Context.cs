@@ -25,7 +25,6 @@ namespace sistemaInventario.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Bodega> Bodega { get; set; }
         public virtual DbSet<Categoria> Categoria { get; set; }
         public virtual DbSet<DetalleEntrada> DetalleEntrada { get; set; }
         public virtual DbSet<DetalleSalida> DetalleSalida { get; set; }
@@ -34,7 +33,6 @@ namespace sistemaInventario.Models
         public virtual DbSet<OrdenSalida> OrdenSalida { get; set; }
         public virtual DbSet<Producto> Producto { get; set; }
         public virtual DbSet<Proveedor> Proveedor { get; set; }
-        public virtual DbSet<StockBodega> StockBodega { get; set; }
         public virtual DbSet<TipoUsuario> TipoUsuario { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
     }

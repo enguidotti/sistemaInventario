@@ -18,7 +18,7 @@ namespace sistemaInventario.Models
         public Producto()
         {
             this.DetalleEntrada = new HashSet<DetalleEntrada>();
-            this.StockBodega = new HashSet<StockBodega>();
+            this.DetalleSalida = new HashSet<DetalleSalida>();
         }
     
         public int id_producto { get; set; }
@@ -29,14 +29,14 @@ namespace sistemaInventario.Models
         public int id_marca { get; set; }
         public int id_categoria { get; set; }
         public int id_proveedor { get; set; }
+        public Nullable<int> cantidad { get; set; }
     
         public virtual Categoria Categoria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetalleEntrada> DetalleEntrada { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DetalleSalida> DetalleSalida { get; set; }
         public virtual Marca Marca { get; set; }
         public virtual Proveedor Proveedor { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StockBodega> StockBodega { get; set; }
-
     }
 }

@@ -15,11 +15,11 @@ namespace sistemaInventario.Models
     public partial class DetalleSalida
     {
         public int id_detalle { get; set; }
-        public int id_stock { get; set; }
+        public int id_producto { get; set; }
         public int cantidad { get; set; }
         public int id_salida { get; set; }
     
         public virtual OrdenSalida OrdenSalida { get; set; }
-        public virtual StockBodega StockBodega { get; set; }
+        public virtual Producto Producto { get; set; }
     }
 }

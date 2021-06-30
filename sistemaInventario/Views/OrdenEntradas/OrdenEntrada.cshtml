@@ -1,0 +1,180 @@
+﻿
+@{
+    ViewBag.Title = "OrdenEntrada";
+}
+
+<div class="card mb-4">
+    <div class="card-header">
+        Ingreso de stock
+    </div>
+    <div class="card-body">
+        <div class="form-group row">
+            <label class="col-sm-2">N° Factura</label>
+            <div class="col-sm-4">
+                <input type="text" id="numFactura" class="form-control" />
+            </div>
+            <label class="col-sm-2">Comentario</label>
+            <div class="col-sm-4">
+                <input type="text" id="comentario" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-1"> Código</label>
+            <div class="col-sm-2">
+                <input type="text" id="codigo" class="form-control" />
+            </div>
+            <div class="col-sm-4">
+                <input  type="text" id="nombre" class="form-control" disabled/>
+            </div>
+            <label>Cantidad</label>
+            <div class="col-sm-2">
+                <input type="number" id="cantidad" class="form-control"  />
+            </div>
+            <button class="btn btn-success" id="agregar">Agregar</button>
+        </div>
+        <div id="contenedorTabla" class="tabla-responsive">
+            <hr />
+            <table class="table table-striped " id="tablaProductos">
+                <thead >
+                    <tr class="bg-success text-white">
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <button class="btn btn-primary" id="guardar">GUARDAR</button>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/swal.min.js"></script>
+<script>
+    //variables
+    let idProducto = 0;
+    let producto = [];//arreglo permite guardar todos los productos a ingresar
+    //guardar datos
+    $('#guardar').click(function () {
+        let error = '';
+        if ($('#numFactura').val().trim() == '') {
+            error = 'Debe ingresar número de factura \n';
+        }
+        if (producto.length == 0) {
+            error += 'Debe ingresar al menos un producto';
+        }
+        if (error != '') {
+            swal('Error validación', error, 'error');
+        } else {
+            const orden = {
+                num_factura: $('#numFactura').val(),
+                comentario: $('#comentario').val()
+            }
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GuardarOrden")',
+                data: '{orden:' + JSON.stringify(orden) + ',detalle:'+ JSON.stringify(producto) +'}',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (result) {
+                    if (result == '') {
+                        //mustra mensaje y recarga la vista
+                        swal({
+                            title: 'Guardado con éxito!!!',
+                            text: 'Los datos se han guardado',
+                            icon: 'success',
+                            button: 'Confirmar',
+                            closeOnClickOutside: true
+                        }).then(function (isConfirm) {
+                            if (isConfirm) {
+                                location.reload();
+                            }
+                        });
+                    }
+                }
+            })
+        }
+    });
+    //verificar existencia del código
+    $('#codigo').blur(function () {
+        if ($('#codigo').val().trim() != '') {
+            //se envia el código al controlador para verificar
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("CodigoExiste")',
+                data: '{codigo:' + JSON.stringify($('#codigo').val().trim()) + '}',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (result) {
+                    if (result != '') {
+                        idProducto = result.id_producto;
+                        $('#nombre').val(result.nombre);
+                    } else {
+                        limpiar();
+                    }
+                }
+            });
+        } else {
+            limpiar();
+        }
+    });
+
+    //agregar producto
+    $('#agregar').click(function () {
+        let error = '';
+        if (idProducto == 0) {
+            error = 'Debe ingresar un producto \n';
+        }
+        if (!$('#cantidad').val()) {
+            error += 'Debe ingresar cantidad del producto';
+        }
+        if (error != '') {
+            swal('Error Validación', error, 'error');
+        }
+        else {
+            const datos = {
+                id_producto: idProducto,
+                cantidad: $('#cantidad').val(),
+                codigo: $('#codigo').val(),
+                nombre: $('#nombre').val()
+            };
+            //verficia si el producto existe en el arreglo
+            let x = 0;//variable para verificar si el producto esta o no  (0: producto no existe en el arreglo, 1: producto existe)
+            if (producto.length > 0) {
+                for (let i = 0; i < producto.length; i++) {
+                    if (producto[i].id_producto == idProducto) {
+                        producto[i].cantidad = datos.cantidad;
+                        x = 1;
+                        break;//cortar el ciclo for
+                    }
+                }
+                if (x == 0) {
+                    producto.push(datos);
+                }
+            }
+            else {
+                producto.push(datos);
+            }
+            limpiar();
+            cargarTabla();
+        }
+
+    });
+    function cargarTabla() {
+        $('#tablaProductos tbody').empty();//limpiar la tabla antes de agregar
+        for (let i = 0; i < producto.length; i++) {
+            fila = '<tr>';
+            fila += '<td>' + producto[i].codigo + '</td>';
+            fila += '<td>' + producto[i].nombre + '</td>';
+            fila += '<td>' + producto[i].cantidad + '</td>';
+            fila += "<td><button class='btn btn-danger'><span class='fa fa-trash'></span></button></td>";
+            fila += '</tr>';
+            $('#tablaProductos tbody').append(fila);//permite insertar la fila que creamos en el body de la tabla
+        }
+    }
+    function limpiar() {
+        idProducto = 0;
+        $('#nombre').val('');
+        $('#codigo').val('');
+        $('#cantidad').val(0);
+    }
+</script>

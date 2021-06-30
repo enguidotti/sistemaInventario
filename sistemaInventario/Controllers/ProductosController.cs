@@ -85,6 +85,7 @@ namespace sistemaInventario.Controllers
         {
             //retornar todos los productos
             var productos = db.Producto.ToList();
+            //verifica 
             if (proveedor != null)
                 productos = productos.Where(p => p.id_proveedor == proveedor).ToList();
 

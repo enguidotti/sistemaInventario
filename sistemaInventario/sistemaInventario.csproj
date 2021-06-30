@@ -1756,6 +1756,7 @@
       <LastGenOutput>dbinventario.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery.easing.min.js" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\popper.min.js" />
@@ -1767,12 +1768,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CategoriasController.cs" />
     <Compile Include="Controllers\MarcasController.cs" />
+    <Compile Include="Controllers\OrdenEntradasController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Bodega.cs">
-      <DependentUpon>dbinventario.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Categoria.cs">
       <DependentUpon>dbinventario.tt</DependentUpon>
@@ -1811,9 +1810,6 @@
       <DependentUpon>dbinventario.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Proveedor.cs">
-      <DependentUpon>dbinventario.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\StockBodega.cs">
       <DependentUpon>dbinventario.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TipoUsuario.cs">
@@ -1863,6 +1859,7 @@
     <Content Include="Views\Productos\_Edit.cshtml" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Views\Productos\_ListarProductos.cshtml" />
+    <Content Include="Views\OrdenEntradas\OrdenEntrada.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
