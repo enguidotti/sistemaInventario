@@ -28,13 +28,13 @@
             </div>
             <label>Cantidad</label>
             <div class="col-sm-2">
-                <input type="number" id="cantidad" class="form-control"  />
+                <input type="number" id="cantidad" class="form-control solonumeros"  />
             </div>
             <button class="btn btn-success" id="agregar">Agregar</button>
         </div>
-        <div id="contenedorTabla" class="tabla-responsive">
+        <div id="contenedorTabla" class="tabla-responsive" hidden>
             <hr />
-            <table class="table table-striped " id="tablaProductos">
+            <table class="table table-striped " id="tablaProductos" >
                 <thead >
                     <tr class="bg-success text-white">
                         <th>Código</th>
@@ -50,6 +50,9 @@
 </div>
 <script src="~/Scripts/swal.min.js"></script>
 <script>
+    $('.solonumeros').on('input', function () {
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
     //variables
     let idProducto = 0;
     let producto = [];//arreglo permite guardar todos los productos a ingresar
@@ -58,6 +61,9 @@
         let error = '';
         if ($('#numFactura').val().trim() == '') {
             error = 'Debe ingresar número de factura \n';
+        }
+        if ($('#comentario').val().trim() == '') {
+            error += 'Debe ingresar comentario \n';
         }
         if (producto.length == 0) {
             error += 'Debe ingresar al menos un producto';
@@ -155,7 +161,10 @@
                 producto.push(datos);
             }
             limpiar();
-            cargarTabla();
+            if (producto.length > 0) {
+                $('#contenedorTabla').removeAttr('hidden', true);//removeAttr permite quitar un atributo a una etiqueta html
+                cargarTabla();
+            }
         }
 
     });
@@ -169,6 +178,7 @@
             fila += "<td><button class='btn btn-danger'><span class='fa fa-trash'></span></button></td>";
             fila += '</tr>';
             $('#tablaProductos tbody').append(fila);//permite insertar la fila que creamos en el body de la tabla
+            eliminar();
         }
     }
     function limpiar() {
@@ -176,5 +186,26 @@
         $('#nombre').val('');
         $('#codigo').val('');
         $('#cantidad').val(0);
+    }
+
+    //elimina elementos de la tabla temporal
+    function eliminar() {
+        $('.btn-danger').click(function () {
+            //obtener el código de la fila seleccionada al presionar el botón de basurero
+            let codigo = $(this).parents('tr').find('td').eq(0).html();
+            //for para recorrer el arreglo de productos
+            for (let i = 0; i < producto.length; i++) {
+                //verifica si encuentra el código en el arreglo
+                if (producto[i].codigo == codigo) {
+                    //splice sirve para eleminar o sacar datos del arreglo(producto)
+                    producto.splice(i, 1);
+                }
+            }
+            //se vuelve a cargar la tabla con los productos del arreglo
+            cargarTabla();
+            if (producto.length == 0) {
+                $('#contenedorTabla').attr('hidden', true);//attr permite agregar una atributo a una etiqueta html
+            }
+        });
     }
 </script>

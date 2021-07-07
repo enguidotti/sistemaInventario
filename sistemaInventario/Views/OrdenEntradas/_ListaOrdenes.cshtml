@@ -1,0 +1,23 @@
+﻿<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Número Factura</th>
+            <th>Comentario</th>
+            <th>Fecha Ingreso</th>
+            <th>Usuario Ingreso</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.num_factura</td>
+                <td>@item.comentario</td>
+                <td>@item.fecha.ToShortDateString()</td>
+                <td>@item.Usuario.nombres</td>
+                <td></td>
+            </tr>
+        }
+    </tbody>
+</table>

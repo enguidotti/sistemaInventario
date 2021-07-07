@@ -1,0 +1,56 @@
+﻿@model IEnumerable<sistemaInventario.Models.OrdenEntrada>
+@{
+    ViewBag.Title = "HistorialEntradas";
+}
+
+<div class="card mb-4">
+    <div class="card-header">
+        Listado de Ordenes de Entrada
+    </div>
+    <div class="card-body">
+        <div class="form-group row">
+            <label class="col-1">Fecha Ingreso</label>
+            <div class="col-6">
+                <input type="text" id="fechas" name="fechas" class="form-control" />
+            </div>
+            <button class="btn btn-success" id="buscar">
+                Buscar
+            </button>
+        </div>
+        <hr />
+        <div class="table-responsive" id="tablaOrdenes"></div>
+    </div>
+</div>
+<link href="~/Content/daterangepicker.css" rel="stylesheet" />
+<script src="~/Scripts/moment.min.js"></script>
+<script src="~/Scripts/daterangepicker.js"></script>
+<script>
+    //configuración de la librería
+    $('input[name="fechas"]').daterangepicker({
+        autoUpdateInput: false,
+        autoApply: true,
+        maxDate: moment(),
+        locale: {
+            format: 'DD-MM-YYYY'
+        }
+    });
+    $('input[name="fechas"]').on('apply.daterangepicker', function (ev, picker) {
+        $(this).val(picker.startDate.format('DD-MM-YYYY') + ' hasta ' + picker.endDate.format('DD-MM-YYYY'));
+    });
+    //fin configuración
+    //llamar datos filtrados(vista parcial)
+    $('#buscar').click(function () {
+
+         //captura de fechas y formato de fechas para enviarlas
+        let inicio = $('#fechas').data('daterangepicker').startDate.format('YYYY-MM-DD');
+        let fin = $('#fechas').data('daterangepicker').endDate.format('YYYY-MM-DD');
+        //datos que permiten acceder al método
+        let datos = '?inicio=' + inicio + '&fin=' + fin;
+        //get para acceeder al método y traer la vista parcial
+        $.get('@Url.Action("ListaOrdenes")' + datos, function (respuesta) {
+            $('#tablaOrdenes').html(respuesta);//carga vista parcial con los datos
+        });
+    });
+
+
+</script>

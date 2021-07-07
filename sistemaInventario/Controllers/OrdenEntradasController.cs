@@ -1,6 +1,7 @@
 ﻿using sistemaInventario.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -45,10 +46,33 @@ namespace sistemaInventario.Controllers
             {
                 item.id_entrada = id_entrada;
                 db.DetalleEntrada.Add(item);
+
+                //actualizar stock al producto (en tabla producto)
+                //buscamos el producto por id, para obtener su cantidad
+                var producto = db.Producto.Find(item.id_producto);
+                producto.cantidad = producto.cantidad + item.cantidad;//añadiendo la cantidad ingresada a la cantidad de producto
+                db.Entry(producto).State = EntityState.Modified;//update
+
+                //guardamos todos los cambios
                 db.SaveChanges();
             }
 
             return Json("");
+        }
+        public ActionResult HistorialEntradas()
+        {
+            return View();
+        }
+        public ActionResult ListaOrdenes(DateTime? inicio, DateTime? fin)
+        {
+            //obtiene toda la lista de ordenes de entrada
+            var ordenes = db.OrdenEntrada.ToList();
+            if(inicio != null)
+            {
+                //select * from OrdenEntrada o WHERE o.fecha >= inicio AND o.fecha<=fin
+                ordenes = ordenes.Where(o => o.fecha >= inicio && o.fecha <= fin).ToList();
+            }
+            return PartialView("_ListaOrdenes", ordenes);
         }
     }
 }
