@@ -1,0 +1,64 @@
+﻿  <!-- Nav Item Productos -->
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProducto"
+       aria-expanded="true" aria-controls="collapseProducto">
+        <i class="fas fa-fw fa-bars"></i>
+        <span>Productos</span>
+    </a>
+    <div id="collapseProducto" class="collapse" aria-labelledby="headingProducto" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Gestión Productos:</h6>
+            <a class="collapse-item" href="@Url.Action("Create", "Productos")">Crear Producto</a>
+            <a class="collapse-item" href="@Url.Action("Index", "Productos")">Listado Productos</a>
+        </div>
+    </div>
+</li>
+<!-- Nav Item Marcas -->
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
+       aria-expanded="true" aria-controls="collapseOne">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>Marcas</span>
+    </a>
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Gestión Marcas:</h6>
+            <a class="collapse-item" href="@Url.Action("Create", "Marcas")">Crear Marca</a>
+            <a class="collapse-item" href="@Url.Action("Index", "Marcas")">Listado Marcas</a>
+        </div>
+    </div>
+</li>
+<!-- Nav Item Categorías -->
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategorias"
+       aria-expanded="true" aria-controls="collapseCategorias">
+        <i class="fas fa-fw fa-wrench"></i>
+        <span>Categorías</span>
+    </a>
+    <div id="collapseCategorias" class="collapse" aria-labelledby="headingCategorias"
+         data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Gestión Categorías:</h6>
+            <a class="collapse-item" href="@Url.Action("Create", "Categorias")">Crear Categoría</a>
+            <a class="collapse-item" href="@Url.Action("Index", "Categorias")">Listado Categorías</a>
+        </div>
+    </div>
+</li>
+<!-- Nav Item Usuarios -->
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers"
+       aria-expanded="true" aria-controls="collapseUsers">
+        <i class="fas fa-fw fa-user"></i>
+        <span>Usuarios</span>
+    </a>
+    <div id="collapseUsers" class="collapse" aria-labelledby="headingCategorias"
+         data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Gestión Usuarios:</h6>
+            <a class="collapse-item" href="@Url.Action("Create", "Usuarios")">Crear Usuarios</a>
+            <a class="collapse-item" href="@Url.Action("Index", "Usuarios")">Listado Categorías</a>
+            <a class="collapse-item" href="@Url.Action("Create", "TipoUsuarios")">Crear Tipo Usuario</a>
+            <a class="collapse-item" href="@Url.Action("Index", "TipoUsuarios")">Listado Tipos usuarios</a>
+        </div>
+    </div>
+</li>

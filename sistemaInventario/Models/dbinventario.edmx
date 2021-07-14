@@ -72,6 +72,7 @@
           <Property Name="id_categoria" Type="int" Nullable="false" />
           <Property Name="id_proveedor" Type="int" Nullable="false" />
           <Property Name="cantidad" Type="int" />
+          <Property Name="foto" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Proveedor">
           <Key>
@@ -304,33 +305,16 @@
           <EntitySet Name="Marca" EntityType="db_inventarioModel.Marca" />
           <EntitySet Name="OrdenEntrada" EntityType="db_inventarioModel.OrdenEntrada" />
           <EntitySet Name="OrdenSalida" EntityType="db_inventarioModel.OrdenSalida" />
-          <EntitySet Name="Producto" EntityType="db_inventarioModel.Producto" />
           <EntitySet Name="Proveedor" EntityType="db_inventarioModel.Proveedor" />
           <EntitySet Name="TipoUsuario" EntityType="db_inventarioModel.TipoUsuario" />
           <EntitySet Name="Usuario" EntityType="db_inventarioModel.Usuario" />
-          <AssociationSet Name="FK_Producto_Categoria" Association="db_inventarioModel.FK_Producto_Categoria">
-            <End Role="Categoria" EntitySet="Categoria" />
-            <End Role="Producto" EntitySet="Producto" />
-          </AssociationSet>
           <AssociationSet Name="FK_DetalleEntrada_OrdenEntrada" Association="db_inventarioModel.FK_DetalleEntrada_OrdenEntrada">
             <End Role="OrdenEntrada" EntitySet="OrdenEntrada" />
-            <End Role="DetalleEntrada" EntitySet="DetalleEntrada" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DetalleEntrada_Producto" Association="db_inventarioModel.FK_DetalleEntrada_Producto">
-            <End Role="Producto" EntitySet="Producto" />
             <End Role="DetalleEntrada" EntitySet="DetalleEntrada" />
           </AssociationSet>
           <AssociationSet Name="FK_DetalleSalida_OrdenSalida" Association="db_inventarioModel.FK_DetalleSalida_OrdenSalida">
             <End Role="OrdenSalida" EntitySet="OrdenSalida" />
             <End Role="DetalleSalida" EntitySet="DetalleSalida" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DetalleSalida_Producto" Association="db_inventarioModel.FK_DetalleSalida_Producto">
-            <End Role="Producto" EntitySet="Producto" />
-            <End Role="DetalleSalida" EntitySet="DetalleSalida" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Producto_Marca" Association="db_inventarioModel.FK_Producto_Marca">
-            <End Role="Marca" EntitySet="Marca" />
-            <End Role="Producto" EntitySet="Producto" />
           </AssociationSet>
           <AssociationSet Name="FK_OrdenEntrada_Usuario" Association="db_inventarioModel.FK_OrdenEntrada_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -344,13 +328,30 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="OrdenSalida" EntitySet="OrdenSalida" />
           </AssociationSet>
-          <AssociationSet Name="FK_Producto_Proveedor" Association="db_inventarioModel.FK_Producto_Proveedor">
-            <End Role="Proveedor" EntitySet="Proveedor" />
-            <End Role="Producto" EntitySet="Producto" />
-          </AssociationSet>
           <AssociationSet Name="FK_Usuario_TipoUsuario" Association="db_inventarioModel.FK_Usuario_TipoUsuario">
             <End Role="TipoUsuario" EntitySet="TipoUsuario" />
             <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <EntitySet Name="Producto" EntityType="db_inventarioModel.Producto" />
+          <AssociationSet Name="FK_Producto_Categoria" Association="db_inventarioModel.FK_Producto_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleEntrada_Producto" Association="db_inventarioModel.FK_DetalleEntrada_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="DetalleEntrada" EntitySet="DetalleEntrada" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleSalida_Producto" Association="db_inventarioModel.FK_DetalleSalida_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="DetalleSalida" EntitySet="DetalleSalida" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Marca" Association="db_inventarioModel.FK_Producto_Marca">
+            <End Role="Marca" EntitySet="Marca" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Proveedor" Association="db_inventarioModel.FK_Producto_Proveedor">
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="Producto" EntitySet="Producto" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Categoria">
@@ -418,25 +419,6 @@
           <NavigationProperty Name="Usuario" Relationship="db_inventarioModel.FK_OrdenSalida_Usuario" FromRole="OrdenSalida" ToRole="Usuario" />
           <NavigationProperty Name="Usuario1" Relationship="db_inventarioModel.FK_OrdenSalida_Usuario1" FromRole="OrdenSalida" ToRole="Usuario" />
         </EntityType>
-        <EntityType Name="Producto">
-          <Key>
-            <PropertyRef Name="id_producto" />
-          </Key>
-          <Property Name="id_producto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="precio" Type="Int32" Nullable="false" />
-          <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="id_marca" Type="Int32" Nullable="false" />
-          <Property Name="id_categoria" Type="Int32" Nullable="false" />
-          <Property Name="id_proveedor" Type="Int32" Nullable="false" />
-          <Property Name="cantidad" Type="Int32" />
-          <NavigationProperty Name="Categoria" Relationship="db_inventarioModel.FK_Producto_Categoria" FromRole="Producto" ToRole="Categoria" />
-          <NavigationProperty Name="DetalleEntrada" Relationship="db_inventarioModel.FK_DetalleEntrada_Producto" FromRole="Producto" ToRole="DetalleEntrada" />
-          <NavigationProperty Name="DetalleSalida" Relationship="db_inventarioModel.FK_DetalleSalida_Producto" FromRole="Producto" ToRole="DetalleSalida" />
-          <NavigationProperty Name="Marca" Relationship="db_inventarioModel.FK_Producto_Marca" FromRole="Producto" ToRole="Marca" />
-          <NavigationProperty Name="Proveedor" Relationship="db_inventarioModel.FK_Producto_Proveedor" FromRole="Producto" ToRole="Proveedor" />
-        </EntityType>
         <EntityType Name="Proveedor">
           <Key>
             <PropertyRef Name="id_proveedor" />
@@ -475,18 +457,6 @@
           <NavigationProperty Name="OrdenSalida1" Relationship="db_inventarioModel.FK_OrdenSalida_Usuario1" FromRole="Usuario" ToRole="OrdenSalida" />
           <NavigationProperty Name="TipoUsuario" Relationship="db_inventarioModel.FK_Usuario_TipoUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
         </EntityType>
-        <Association Name="FK_Producto_Categoria">
-          <End Type="db_inventarioModel.Categoria" Role="Categoria" Multiplicity="1" />
-          <End Type="db_inventarioModel.Producto" Role="Producto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Categoria">
-              <PropertyRef Name="id_categoria" />
-            </Principal>
-            <Dependent Role="Producto">
-              <PropertyRef Name="id_categoria" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DetalleEntrada_OrdenEntrada">
           <End Type="db_inventarioModel.OrdenEntrada" Role="OrdenEntrada" Multiplicity="1" />
           <End Type="db_inventarioModel.DetalleEntrada" Role="DetalleEntrada" Multiplicity="*" />
@@ -499,18 +469,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DetalleEntrada_Producto">
-          <End Type="db_inventarioModel.Producto" Role="Producto" Multiplicity="1" />
-          <End Type="db_inventarioModel.DetalleEntrada" Role="DetalleEntrada" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Producto">
-              <PropertyRef Name="id_producto" />
-            </Principal>
-            <Dependent Role="DetalleEntrada">
-              <PropertyRef Name="id_producto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DetalleSalida_OrdenSalida">
           <End Type="db_inventarioModel.OrdenSalida" Role="OrdenSalida" Multiplicity="1" />
           <End Type="db_inventarioModel.DetalleSalida" Role="DetalleSalida" Multiplicity="*" />
@@ -520,30 +478,6 @@
             </Principal>
             <Dependent Role="DetalleSalida">
               <PropertyRef Name="id_salida" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DetalleSalida_Producto">
-          <End Type="db_inventarioModel.Producto" Role="Producto" Multiplicity="1" />
-          <End Type="db_inventarioModel.DetalleSalida" Role="DetalleSalida" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Producto">
-              <PropertyRef Name="id_producto" />
-            </Principal>
-            <Dependent Role="DetalleSalida">
-              <PropertyRef Name="id_producto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Producto_Marca">
-          <End Type="db_inventarioModel.Marca" Role="Marca" Multiplicity="1" />
-          <End Type="db_inventarioModel.Producto" Role="Producto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Marca">
-              <PropertyRef Name="id_marca" />
-            </Principal>
-            <Dependent Role="Producto">
-              <PropertyRef Name="id_marca" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -583,18 +517,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Producto_Proveedor">
-          <End Type="db_inventarioModel.Proveedor" Role="Proveedor" Multiplicity="1" />
-          <End Type="db_inventarioModel.Producto" Role="Producto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Proveedor">
-              <PropertyRef Name="id_proveedor" />
-            </Principal>
-            <Dependent Role="Producto">
-              <PropertyRef Name="id_proveedor" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Usuario_TipoUsuario">
           <End Type="db_inventarioModel.TipoUsuario" Role="TipoUsuario" Multiplicity="1" />
           <End Type="db_inventarioModel.Usuario" Role="Usuario" Multiplicity="*" />
@@ -604,6 +526,86 @@
             </Principal>
             <Dependent Role="Usuario">
               <PropertyRef Name="id_tipousuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="id_producto" />
+          </Key>
+          <Property Name="id_producto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="precio" Type="Int32" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="id_marca" Type="Int32" Nullable="false" />
+          <Property Name="id_categoria" Type="Int32" Nullable="false" />
+          <Property Name="id_proveedor" Type="Int32" Nullable="false" />
+          <Property Name="cantidad" Type="Int32" />
+          <Property Name="foto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Categoria" Relationship="db_inventarioModel.FK_Producto_Categoria" FromRole="Producto" ToRole="Categoria" />
+          <NavigationProperty Name="DetalleEntrada" Relationship="db_inventarioModel.FK_DetalleEntrada_Producto" FromRole="Producto" ToRole="DetalleEntrada" />
+          <NavigationProperty Name="DetalleSalida" Relationship="db_inventarioModel.FK_DetalleSalida_Producto" FromRole="Producto" ToRole="DetalleSalida" />
+          <NavigationProperty Name="Marca" Relationship="db_inventarioModel.FK_Producto_Marca" FromRole="Producto" ToRole="Marca" />
+          <NavigationProperty Name="Proveedor" Relationship="db_inventarioModel.FK_Producto_Proveedor" FromRole="Producto" ToRole="Proveedor" />
+        </EntityType>
+        <Association Name="FK_Producto_Categoria">
+          <End Type="db_inventarioModel.Categoria" Role="Categoria" Multiplicity="1" />
+          <End Type="db_inventarioModel.Producto" Role="Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="id_categoria" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="id_categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleEntrada_Producto">
+          <End Type="db_inventarioModel.Producto" Role="Producto" Multiplicity="1" />
+          <End Type="db_inventarioModel.DetalleEntrada" Role="DetalleEntrada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="id_producto" />
+            </Principal>
+            <Dependent Role="DetalleEntrada">
+              <PropertyRef Name="id_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleSalida_Producto">
+          <End Type="db_inventarioModel.Producto" Role="Producto" Multiplicity="1" />
+          <End Type="db_inventarioModel.DetalleSalida" Role="DetalleSalida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="id_producto" />
+            </Principal>
+            <Dependent Role="DetalleSalida">
+              <PropertyRef Name="id_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Marca">
+          <End Type="db_inventarioModel.Marca" Role="Marca" Multiplicity="1" />
+          <End Type="db_inventarioModel.Producto" Role="Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marca">
+              <PropertyRef Name="id_marca" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="id_marca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Proveedor">
+          <End Type="db_inventarioModel.Proveedor" Role="Proveedor" Multiplicity="1" />
+          <End Type="db_inventarioModel.Producto" Role="Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="id_proveedor" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="id_proveedor" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -673,21 +675,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Producto">
-            <EntityTypeMapping TypeName="db_inventarioModel.Producto">
-              <MappingFragment StoreEntitySet="Producto">
-                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
-                <ScalarProperty Name="id_proveedor" ColumnName="id_proveedor" />
-                <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
-                <ScalarProperty Name="id_marca" ColumnName="id_marca" />
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="precio" ColumnName="precio" />
-                <ScalarProperty Name="codigo" ColumnName="codigo" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="id_producto" ColumnName="id_producto" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Proveedor">
             <EntityTypeMapping TypeName="db_inventarioModel.Proveedor">
               <MappingFragment StoreEntitySet="Proveedor">
@@ -720,6 +707,22 @@
                 <ScalarProperty Name="apellidos" ColumnName="apellidos" />
                 <ScalarProperty Name="nombres" ColumnName="nombres" />
                 <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Producto">
+            <EntityTypeMapping TypeName="db_inventarioModel.Producto">
+              <MappingFragment StoreEntitySet="Producto">
+                <ScalarProperty Name="foto" ColumnName="foto" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="id_proveedor" ColumnName="id_proveedor" />
+                <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
+                <ScalarProperty Name="id_marca" ColumnName="id_marca" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id_producto" ColumnName="id_producto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

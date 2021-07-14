@@ -31,9 +31,9 @@ namespace sistemaInventario.Models
         public virtual DbSet<Marca> Marca { get; set; }
         public virtual DbSet<OrdenEntrada> OrdenEntrada { get; set; }
         public virtual DbSet<OrdenSalida> OrdenSalida { get; set; }
-        public virtual DbSet<Producto> Producto { get; set; }
         public virtual DbSet<Proveedor> Proveedor { get; set; }
         public virtual DbSet<TipoUsuario> TipoUsuario { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<Producto> Producto { get; set; }
     }
 }

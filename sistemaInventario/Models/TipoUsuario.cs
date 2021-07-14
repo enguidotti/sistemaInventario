@@ -11,8 +11,7 @@ namespace sistemaInventario.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class TipoUsuario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,13 +19,9 @@ namespace sistemaInventario.Models
         {
             this.Usuario = new HashSet<Usuario>();
         }
-        [Key]
+    
         public int id_tipo { get; set; }
-        [Required]// Required el campo es obligatio
-        [StringLength(50,MinimumLength = 4)]//StringLength inica la cantidad de letras
-        [Display(Name = "Tipo Usuario")]//Display(Name) indica el nombre que se verá reflejado en las vistas
         public string nombre { get; set; }
-        [Display(Name = "Descripción")]
         public string descripcion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

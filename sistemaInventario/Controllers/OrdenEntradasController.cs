@@ -35,7 +35,7 @@ namespace sistemaInventario.Controllers
         public JsonResult GuardarOrden(OrdenEntrada orden,List<DetalleEntrada> detalle)
         {
             orden.fecha = DateTime.Now;
-            orden.id_user = 1;//luego se debe cambiar por el usuario logeado en el sistema 
+            orden.id_user = int.Parse(Session["idUser"].ToString()); 
             db.OrdenEntrada.Add(orden);
             db.SaveChanges();
             //capturar el id autoincrementable que se crea al guardar el registro

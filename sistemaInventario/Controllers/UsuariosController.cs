@@ -14,6 +14,35 @@ namespace sistemaInventario.Controllers
     {
         private db_inventarioEntities db = new db_inventarioEntities();
 
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(string email, string password)
+        {
+            //verifica si las credenciales existen en la base de datos
+            var user = db.Usuario.FirstOrDefault(u => u.email == email && u.pass == password);
+            //si existen
+            if(user != null)
+            {
+                //variable session sirve para almacenar datos de manera momentanea (se puede llamar en cualquier lugar del sistema)
+                Session["Nombre"] = user.nombres + " " + user.apellidos;
+                Session["idUser"] = user.id_usuario;
+                Session["TipoUser"] = user.id_tipousuario;
+                //redirecciona a la página de inicio
+                return RedirectToAction("Index", "Productos");
+            }
+            return View();
+        }
+        public ActionResult LogOut()
+        {
+            Session.Clear();
+            Session.RemoveAll();
+            Session.Abandon();
+            return RedirectToAction("Login");
+        }
         // GET: Usuarios
         public ActionResult Index()
         {

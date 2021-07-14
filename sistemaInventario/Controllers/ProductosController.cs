@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -21,10 +22,21 @@ namespace sistemaInventario.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Create(Producto producto, int marca, int proveedor)
+        //HttpPostedFileBase permite recibir un archivo enviado por post
+        public ActionResult Create(Producto producto,  HttpPostedFileBase imagen)
         {
-            producto.id_marca = marca;
-            producto.id_proveedor = proveedor;
+            if(imagen != null)
+            {
+                //capturar el extensión de la imagen 
+                string extension = Path.GetExtension(imagen.FileName);
+                //string nombreArchivo = Path.GetFileName(imagen.FileName); forma de capturar el nombre
+                string nombreArchivo = producto.codigo + extension;//se combina el nuevo nombre con la extensión del archivo
+                //ruta de donde se guardará el archivo
+                string ruta = Path.Combine(Server.MapPath("~/Imagenes/"), nombreArchivo);
+                imagen.SaveAs(ruta);// el archivo.SaveAs(ruta) permita copiar el archivo subido a la carpeta de destino 
+                producto.foto = "~/Imagenes/" + nombreArchivo;
+            }
+
             db.Producto.Add(producto);
             db.SaveChanges();
 
@@ -32,7 +44,7 @@ namespace sistemaInventario.Controllers
             ViewBag.id_categoria = new SelectList(db.Categoria, "id_categoria", "nombre");
             ViewBag.marca = new SelectList(db.Marca.OrderBy(m => m.nombre), "id_marca", "nombre");
             ViewBag.proveedor = new SelectList(db.Proveedor, "id_proveedor", "nombre");
-            return View();
+            return Json("Ok");
         }
         //método para verificar si el código del producto ya esta ingresado
         [HttpPost]

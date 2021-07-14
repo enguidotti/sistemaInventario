@@ -9,126 +9,100 @@
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/jquery.easing.min.js"></script>
     <script src="~/Scripts/sb-admin-2.min.js"></script>
-   
+
 
 </head>
 <body class="page-top">
-    <div id="wrapper">
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    @if (Session["idUser"] != null)
+    {
+        <div id="wrapper">
+            <!-- Sidebar -->
+            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="~\">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">Sistema Inventario</div>
-            </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Inicio</span>
+                <!-- Sidebar - Brand -->
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="~\">
+                    <div class="sidebar-brand-icon rotate-n-15">
+                        <i class="fas fa-laugh-wink"></i>
+                    </div>
+                    <div class="sidebar-brand-text mx-3">Sistema Inventario</div>
                 </a>
-            </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+                <!-- Divider -->
+                <hr class="sidebar-divider my-0">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Mantenerdores
+                <!-- Nav Item - Dashboard -->
+                <li class="nav-item active">
+                    <a class="nav-link" href="">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Inicio</span>
+                    </a>
+                </li>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Mantenerdores
+                </div>
+                @if (Session["TipoUser"].ToString() == "1")
+                {
+                    @Html.Partial("_MenuAdmin")
+                }
+                @if (Session["TipoUser"].ToString() == "3")
+                {
+                    @Html.Partial("_MenuUsuario")
+                }
+            </ul>
+            <!-- End of Sidebar -->
+            <!-- Content Wrapper -->
+            <div id="content-wrapper" class="d-flex flex-column">
+
+                <!-- Main Content -->
+                <div id="content">
+
+                    <!-- Topbar -->
+                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                        <!-- Sidebar Toggle (Topbar) -->
+                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item dropdown no-arrow"><b>@Session["Nombre"]</b></li>
+                            <div class="topbar-divider d-none d-sm-block"></div>
+                            <li class="nav-item dropdown no-arrow">
+                                <a href="@Url.Action("LogOut", "Usuarios")"><span class="fa fa-user-lock"> </span> Salir</a>
+                            </li>
+                        </ul>
+
+                    </nav>
+                    <!-- End of Topbar -->
+                    <!-- Begin Page Content -->
+                    <div class="container-fluid">
+                        @RenderBody()
+                    </div>
+                    <!-- /.container-fluid -->
+                </div>
+
+                <!-- End of Main Content -->
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Derechos reservados &copy; </span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
+
             </div>
-            <!-- Nav Item Productos -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProducto"
-                   aria-expanded="true" aria-controls="collapseProducto">
-                    <i class="fas fa-fw fa-bars"></i>
-                    <span>Productos</span>
-                </a>
-                <div id="collapseProducto" class="collapse" aria-labelledby="headingProducto" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Gestión Productos:</h6>
-                        <a class="collapse-item" href="@Url.Action("Create","Productos")">Crear Producto</a>
-                        <a class="collapse-item" href="@Url.Action("Index","Productos")">Listado Productos</a>
-                    </div>
-                </div>
-            </li>
-            <!-- Nav Item Marcas -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
-                   aria-expanded="true" aria-controls="collapseOne">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Marcas</span>
-                </a>
-                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Gestión Marcas:</h6>
-                        <a class="collapse-item" href="@Url.Action("Create","Marcas")">Crear Marca</a>
-                        <a class="collapse-item" href="@Url.Action("Index","Marcas")">Listado Marcas</a>
-                    </div>
-                </div>
-            </li>
-            <!-- Nav Item Categorías -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategorias"
-                   aria-expanded="true" aria-controls="collapseCategorias">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Categorías</span>
-                </a>
-                <div id="collapseCategorias" class="collapse" aria-labelledby="headingCategorias"
-                     data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Gestión Categorías:</h6>
-                        <a class="collapse-item" href="@Url.Action("Create","Categorias")">Crear Categoría</a>
-                        <a class="collapse-item" href="@Url.Action("Index","Categorias")">Listado Categorías</a>
-                    </div>
-                </div>
-            </li>
-
-        </ul>
-        <!-- End of Sidebar -->
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
-            <div id="content">
-
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
-
-
-                </nav>
-                <!-- End of Topbar -->
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-                    @RenderBody()
-                </div>
-                <!-- /.container-fluid -->
-            </div>
-
-            <!-- End of Main Content -->
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Derechos reservados &copy; </span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
-
+            <!-- End of Content Wrapper -->
         </div>
-        <!-- End of Content Wrapper -->
-    </div>
+    }
+    else
+    {
+        Response.Redirect("~/");
+    }
 </body>
 </html>

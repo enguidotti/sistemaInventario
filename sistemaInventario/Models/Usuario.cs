@@ -11,9 +11,7 @@ namespace sistemaInventario.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-
+    
     public partial class Usuario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,42 +21,15 @@ namespace sistemaInventario.Models
             this.OrdenSalida = new HashSet<OrdenSalida>();
             this.OrdenSalida1 = new HashSet<OrdenSalida>();
         }
-
-        [Key]
     
         public int id_usuario { get; set; }
-        [Required (ErrorMessage = "Nombre es obligatorio")]//ErroMessage personaliza el mensaje de error
-        [Display(Name = "Nombres")]
-        [StringLength(50)]
         public string nombres { get; set; }
-        [Required]
-        [Display(Name = "Apellidos")]
         public string apellidos { get; set; }
-        [Required]
-        [Display(Name = "RUN")]
         public string rut { get; set; }
-        [Required]
-        [Display(Name = "Teléfono")]
         public int fono { get; set; }
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
         public string email { get; set; }
-        [Required]
-        [Display(Name = "Contraseña")]
-        [DataType(DataType.Password)]
         public string pass { get; set; }
-        [Required]
-        [Display(Name = "Confirmar Contraseña")]
-        [Compare("pass")]//compar el valor del input con el de pass
-        [DataType(DataType.Password)]//indica que el tipo de dato es password
-        [NotMapped]//le indica que el atributo no es parte de la base de bases
-        public string confirmPass { get; set; }
-        [Required]
-        [Display(Name = "Cargo")]
         public string cargo { get; set; }
-        [Required]
-        [Display(Name = "Tipo Usuario")]
         public int id_tipousuario { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

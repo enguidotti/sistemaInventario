@@ -9,6 +9,7 @@
             <th>Precio</th>
             <th>Cantidad</th>
             <th>Descripción</th>
+            <th>Foto</th>
             <th></th>
         </tr>
     </thead>
@@ -24,6 +25,12 @@
                 <td>@item.precio.ToString("C")</td>
                 <td>@item.cantidad</td>
                 <td>@item.descripcion</td>
+                <td>
+                    @if (item.foto != null)
+                    {
+                         <img src="@Url.Content(item.foto)"  style="height:200px"/>
+                    }
+                </td>
                 <td>
                     <button class="btn btn-warning" data-toggle="modal" data-target="#modalEdit"
                             data-url="@Url.Action("Edit","Productos", new { id = item.id_producto})">

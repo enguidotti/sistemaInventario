@@ -11,21 +11,21 @@
         <EntityTypeShape EntityType="db_inventarioModel.Marca" Width="1.5" PointX="0.75" PointY="4.25" />
         <EntityTypeShape EntityType="db_inventarioModel.OrdenEntrada" Width="1.5" PointX="3" PointY="17.875" />
         <EntityTypeShape EntityType="db_inventarioModel.OrdenSalida" Width="1.5" PointX="3" PointY="10.875" />
-        <EntityTypeShape EntityType="db_inventarioModel.Producto" Width="1.5" PointX="3" PointY="3.25" />
         <EntityTypeShape EntityType="db_inventarioModel.Proveedor" Width="1.5" PointX="0.75" PointY="7.25" />
         <EntityTypeShape EntityType="db_inventarioModel.TipoUsuario" Width="1.5" PointX="1.5" PointY="15.25" />
         <EntityTypeShape EntityType="db_inventarioModel.Usuario" Width="1.5" PointX="0.75" PointY="10.375" />
-        <AssociationConnector Association="db_inventarioModel.FK_Producto_Categoria" />
         <AssociationConnector Association="db_inventarioModel.FK_DetalleEntrada_OrdenEntrada" />
-        <AssociationConnector Association="db_inventarioModel.FK_DetalleEntrada_Producto" />
         <AssociationConnector Association="db_inventarioModel.FK_DetalleSalida_OrdenSalida" />
-        <AssociationConnector Association="db_inventarioModel.FK_DetalleSalida_Producto" />
-        <AssociationConnector Association="db_inventarioModel.FK_Producto_Marca" />
         <AssociationConnector Association="db_inventarioModel.FK_OrdenEntrada_Usuario" />
         <AssociationConnector Association="db_inventarioModel.FK_OrdenSalida_Usuario" />
         <AssociationConnector Association="db_inventarioModel.FK_OrdenSalida_Usuario1" />
-        <AssociationConnector Association="db_inventarioModel.FK_Producto_Proveedor" />
         <AssociationConnector Association="db_inventarioModel.FK_Usuario_TipoUsuario" />
+        <EntityTypeShape EntityType="db_inventarioModel.Producto" Width="1.5" PointX="3" PointY="3.125" />
+        <AssociationConnector Association="db_inventarioModel.FK_Producto_Categoria" />
+        <AssociationConnector Association="db_inventarioModel.FK_DetalleEntrada_Producto" />
+        <AssociationConnector Association="db_inventarioModel.FK_DetalleSalida_Producto" />
+        <AssociationConnector Association="db_inventarioModel.FK_Producto_Marca" />
+        <AssociationConnector Association="db_inventarioModel.FK_Producto_Proveedor" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
